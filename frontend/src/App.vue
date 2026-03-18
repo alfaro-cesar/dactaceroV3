@@ -1,275 +1,208 @@
 <template>
-  <div
-   id="app" class="app-ultra font-sans antialiased min-h-screen"
-  >
+  <div id="app" class="app-ultra font-sans antialiased min-h-screen">
     <div v-if="ventana === 'inicio'" class="min-h-screen bg-white">
-       <nav class="nav-ultra flex justify-between items-center p-6 max-w-7xl mx-auto">
+      <nav
+        class="nav-ultra flex justify-between items-center p-6 max-w-7xl mx-auto"
+      >
+        <!-- LOGO -->
 
-<!-- LOGO -->
+        <div class="flex items-center gap-3">
+          <div class="logo-box">C</div>
 
-<div class="flex items-center gap-3">
+          <span class="logo-text"> PROYECTO C.E.R.O. </span>
+        </div>
 
-<div class="logo-box">
-C
-</div>
+        <!-- BOTONES -->
 
-<span class="logo-text">
-PROYECTO C.E.R.O.
-</span>
+        <div class="flex gap-4">
+          <button @click="ventana = 'login'" class="btn-login">Entrar</button>
 
-</div>
-
-
-<!-- BOTONES -->
-
-<div class="flex gap-4">
-
-<button
-@click="ventana = 'login'"
-class="btn-login"
->
-Entrar
-</button>
-
-<button
-@click="ventana = 'registroColegio'"
-class="btn-registro"
->
-Registrar Colegio
-</button>
-
-</div>
-
-     </nav>
+          <button @click="ventana = 'registroColegio'" class="btn-registro">
+            Registrar Colegio
+          </button>
+        </div>
+      </nav>
 
       <!-- CARRUSEL BULLYING -->
-<section class="carruselCero">
+      <section class="carruselCero">
+        <div class="carrusel-container">
+          <div
+            class="carrusel-slide"
+            :style="{ transform: 'translateX(-' + indexCarrusel * 100 + '%)' }"
+          >
+            <div class="slide">
+              <img
+                src="https://images.unsplash.com/photo-1577896851231-70ef18881754"
+              />
+              <div class="texto">
+                <h2>Detener el Bullying es tarea de todos</h2>
+                <p>Proyecto C.E.R.O protege la convivencia escolar.</p>
+              </div>
+            </div>
 
-  <div class="carrusel-container">
+            <div class="slide">
+              <img
+                src="https://images.unsplash.com/photo-1588072432836-e10032774350"
+              />
+              <div class="texto">
+                <h2>Reporta situaciones de acoso</h2>
+                <p>Tu voz puede cambiar una vida.</p>
+              </div>
+            </div>
 
-    <div class="carrusel-slide" :style="{transform:'translateX(-'+(indexCarrusel*100)+'%)'}">
-
-      <div class="slide">
-        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754">
-        <div class="texto">
-          <h2>Detener el Bullying es tarea de todos</h2>
-          <p>Proyecto C.E.R.O protege la convivencia escolar.</p>
+            <div class="slide">
+              <img
+                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644"
+              />
+              <div class="texto">
+                <h2>Convivencia Escolar</h2>
+                <p>Construyamos colegios seguros.</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="slide">
-        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350">
-        <div class="texto">
-          <h2>Reporta situaciones de acoso</h2>
-          <p>Tu voz puede cambiar una vida.</p>
+        <div class="dots">
+          <span
+            v-for="(item, i) in 3"
+            :key="i"
+            @click="indexCarrusel = i"
+            :class="{ activo: indexCarrusel === i }"
+          ></span>
         </div>
-      </div>
+      </section>
+      <br /><br />
 
-      <div class="slide">
-        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644">
-        <div class="texto">
-          <h2>Convivencia Escolar</h2>
-          <p>Construyamos colegios seguros.</p>
+      <header class="header-ultra py-28 px-6 text-center max-w-4xl mx-auto">
+        <h1 class="titulo-ultra">Convivencia y Respeto Escolar</h1>
+
+        <p class="texto-ultra">
+          Una herramienta diseñada para la gestión moderna del clima
+          institucional, alineada con los estándares de protección y bienestar
+          estudiantil.
+        </p>
+
+        <div class="flex justify-center gap-4">
+          <a href="#ley1620" class="btn-ultra"> Saber más </a>
         </div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="dots">
-    <span
-      v-for="(item,i) in 3"
-      :key="i"
-      @click="indexCarrusel=i"
-      :class="{activo:indexCarrusel===i}"
-    ></span>
-  </div>
-
-</section>
-<br><br>
-
-    <header class="header-ultra py-28 px-6 text-center max-w-4xl mx-auto">
-
-<h1 class="titulo-ultra">
-Convivencia y Respeto Escolar
-</h1>
-
-<p class="texto-ultra">
-Una herramienta diseñada para la gestión moderna del clima
-institucional, alineada con los estándares de protección
-y bienestar estudiantil.
-</p>
-
-<div class="flex justify-center gap-4">
-
-<a
-href="#ley1620"
-class="btn-ultra"
->
-Saber más
-</a>
-
-</div>
-
-    </header>
-    <br><br>
+      </header>
+      <br /><br />
 
       <section id="ley1620" class="ley-section py-28 px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-16 items-center">
+            <!-- TEXTO -->
 
-<div class="max-w-6xl mx-auto">
+            <div>
+              <span class="ley-tag"> Marco Legal Colombiano </span>
 
-<div class="grid md:grid-cols-2 gap-16 items-center">
+              <h2 class="ley-title">Ley 1620 de 2013</h2>
 
-<!-- TEXTO -->
+              <p class="ley-text">
+                Esta ley crea el <b>Sistema Nacional de Convivencia Escolar</b>,
+                cuyo objetivo es promover, orientar y fortalecer la convivencia,
+                la educación para el ejercicio de los derechos humanos, sexuales
+                y reproductivos, y la mitigación de la violencia escolar.
+              </p>
 
-<div>
+              <ul class="space-y-4">
+                <li class="ley-list">
+                  <span class="check">✓</span>
+                  Prevención del acoso escolar (Bullying).
+                </li>
 
-<span class="ley-tag">
-Marco Legal Colombiano
-</span>
+                <li class="ley-list">
+                  <span class="check">✓</span>
+                  Ruta de Atención Integral.
+                </li>
 
-<h2 class="ley-title">
-Ley 1620 de 2013
-</h2>
+                <li class="ley-list">
+                  <span class="check">✓</span>
+                  Promoción de entornos seguros.
+                </li>
+              </ul>
+            </div>
 
-<p class="ley-text">
-Esta ley crea el <b>Sistema Nacional de Convivencia Escolar</b>,
-cuyo objetivo es promover, orientar y fortalecer la convivencia,
-la educación para el ejercicio de los derechos humanos, sexuales
-y reproductivos, y la mitigación de la violencia escolar.
-</p>
+            <!-- TARJETAS -->
 
-<ul class="space-y-4">
+            <div class="grid grid-cols-1 gap-6">
+              <div class="card-ley">
+                <h4>¿Qué es el Bullying?</h4>
 
-<li class="ley-list">
-<span class="check">✓</span>
-Prevención del acoso escolar (Bullying).
-</li>
+                <p>
+                  Es una forma de conducta agresiva, intencionada y repetida,
+                  que ocurre sin motivación evidente, adoptada por uno o más
+                  estudiantes contra otro u otros.
+                </p>
+              </div>
 
-<li class="ley-list">
-<span class="check">✓</span>
-Ruta de Atención Integral.
-</li>
+              <div class="card-ley">
+                <h4>¿Qué es el Ciberbullying?</h4>
 
-<li class="ley-list">
-<span class="check">✓</span>
-Promoción de entornos seguros.
-</li>
-
-</ul>
-
-</div>
-
-<!-- TARJETAS -->
-
-<div class="grid grid-cols-1 gap-6">
-
-<div class="card-ley">
-
-<h4>¿Qué es el Bullying?</h4>
-
-<p>
-Es una forma de conducta agresiva, intencionada y repetida,
-que ocurre sin motivación evidente, adoptada por uno o más
-estudiantes contra otro u otros.
-</p>
-
-</div>
-
-<div class="card-ley">
-
-<h4>¿Qué es el Ciberbullying?</h4>
-
-<p>
-Acoso que ocurre a través de medios digitales como redes
-sociales, mensajes o plataformas de juegos, buscando
-atemorizar o humillar.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+                <p>
+                  Acoso que ocurre a través de medios digitales como redes
+                  sociales, mensajes o plataformas de juegos, buscando
+                  atemorizar o humillar.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
-      <br><br>
+      <br /><br />
 
       <section class="py-24 px-6 max-w-6xl mx-auto relative">
+        <h3 class="titulo-saas">Clasificación de Situaciones</h3>
 
-<h3 class="titulo-saas">
-Clasificación de Situaciones
-</h3>
+        <div class="grid md:grid-cols-3 gap-10">
+          <!-- TIPO 1 -->
 
-<div class="grid md:grid-cols-3 gap-10">
+          <div class="card-saas tipo1">
+            <div class="numero">I</div>
 
-<!-- TIPO 1 -->
+            <h4>Situación Tipo I</h4>
 
-<div class="card-saas tipo1">
+            <p class="sub">Conflictos esporádicos.</p>
 
-<div class="numero">I</div>
+            <p class="desc">
+              Discusiones o malentendidos que no afectan la integridad física ni
+              mental de forma sistemática.
+            </p>
+          </div>
 
-<h4>Situación Tipo I</h4>
+          <!-- TIPO 2 -->
 
-<p class="sub">
-Conflictos esporádicos.
-</p>
+          <div class="card-saas tipo2">
+            <div class="numero">II</div>
 
-<p class="desc">
-Discusiones o malentendidos que no afectan la integridad
-física ni mental de forma sistemática.
-</p>
+            <h4>Situación Tipo II</h4>
 
-</div>
+            <p class="sub">Acoso o Ciberacoso.</p>
 
+            <p class="desc">
+              Situaciones de agresión repetitivas que no revisten
+              características de delito pero afectan el clima escolar.
+            </p>
+          </div>
 
-<!-- TIPO 2 -->
+          <!-- TIPO 3 -->
 
-<div class="card-saas tipo2">
+          <div class="card-saas tipo3">
+            <div class="numero">III</div>
 
-<div class="numero">II</div>
+            <h4>Situación Tipo III</h4>
 
-<h4>Situación Tipo II</h4>
+            <p class="sub">Presunto Delito.</p>
 
-<p class="sub">
-Acoso o Ciberacoso.
-</p>
+            <p class="desc">
+              Agresiones que por su gravedad pueden ser constitutivas de delitos
+              penales o infracciones a la ley.
+            </p>
+          </div>
+        </div>
+      </section>
+      <br />
 
-<p class="desc">
-Situaciones de agresión repetitivas que no revisten
-características de delito pero afectan el clima escolar.
-</p>
-
-</div>
-
-
-<!-- TIPO 3 -->
-
-<div class="card-saas tipo3">
-
-<div class="numero">III</div>
-
-<h4>Situación Tipo III</h4>
-
-<p class="sub">
-Presunto Delito.
-</p>
-
-<p class="desc">
-Agresiones que por su gravedad pueden ser constitutivas
-de delitos penales o infracciones a la ley.
-</p>
-
-</div>
-
-</div>
-
-     </section>
-     <br>
-   
       <section
         class="py-24 bg-gradient-to-br from-blue-900 via-indigo-900 to-black text-white"
       >
@@ -333,85 +266,102 @@ de delitos penales o infracciones a la ley.
           </h3>
         </div>
       </section>
-      <br>
-     <section class="ley-container">
+      <br />
+      <section class="ley-container">
+        <h2 class="titulo">Aspectos Clave de la Ley 1620 de 2013</h2>
 
-<h2 class="titulo">Aspectos Clave de la Ley 1620 de 2013</h2>
+        <p class="descripcion">
+          La Ley 1620 establece el Sistema Nacional de Convivencia Escolar para
+          prevenir la violencia escolar y promover ambientes seguros en las
+          instituciones educativas.
+        </p>
 
-<p class="descripcion">
-La Ley 1620 establece el Sistema Nacional de Convivencia Escolar para prevenir
-la violencia escolar y promover ambientes seguros en las instituciones educativas.
-</p>
+        <div class="grid">
+          <div class="card">
+            <h3>🏫 Sistema de Convivencia Escolar</h3>
+            <p>
+              La ley crea un sistema que involucra colegios, familias y el
+              Estado para garantizar el respeto de los derechos humanos y
+              prevenir el bullying dentro de las instituciones educativas.
+            </p>
+          </div>
 
-<div class="grid">
+          <div class="card">
+            <h3>👩‍🏫 Comité de Convivencia</h3>
+            <p>
+              Cada colegio debe tener un comité encargado de analizar, prevenir
+              y atender los casos de violencia escolar entre estudiantes.
+            </p>
+          </div>
 
-<div class="card">
-<h3>🏫 Sistema de Convivencia Escolar</h3>
-<p>
-La ley crea un sistema que involucra colegios, familias y el Estado
-para garantizar el respeto de los derechos humanos y prevenir
-el bullying dentro de las instituciones educativas.
-</p>
-</div>
+          <div class="card">
+            <h3>🚨 Ruta de Atención</h3>
+            <p>
+              Los colegios deben seguir una ruta de atención para identificar,
+              reportar y solucionar los casos de bullying de forma rápida y
+              efectiva.
+            </p>
+          </div>
 
-<div class="card">
-<h3>👩‍🏫 Comité de Convivencia</h3>
-<p>
-Cada colegio debe tener un comité encargado de analizar,
-prevenir y atender los casos de violencia escolar
-entre estudiantes.
-</p>
-</div>
+          <div class="card">
+            <h3>🧠 Prevención del Bullying</h3>
+            <p>
+              La ley busca promover la educación en valores, la resolución
+              pacífica de conflictos y el respeto entre estudiantes.
+            </p>
+          </div>
 
-<div class="card">
-<h3>🚨 Ruta de Atención</h3>
-<p>
-Los colegios deben seguir una ruta de atención para
-identificar, reportar y solucionar los casos de bullying
-de forma rápida y efectiva.
-</p>
-</div>
+          <div class="card">
+            <h3>👨‍👩‍👧 Participación de la Familia</h3>
+            <p>
+              Los padres y acudientes deben participar activamente en los
+              procesos de convivencia escolar y en la prevención del acoso
+              escolar.
+            </p>
+          </div>
 
-<div class="card">
-<h3>🧠 Prevención del Bullying</h3>
-<p>
-La ley busca promover la educación en valores,
-la resolución pacífica de conflictos y el respeto
-entre estudiantes.
-</p>
-</div>
+          <div class="card">
+            <h3>⚖️ Protección de los Estudiantes</h3>
+            <p>
+              La ley protege a los estudiantes víctimas de violencia escolar y
+              garantiza mecanismos para su atención y acompañamiento.
+            </p>
+          </div>
+        </div>
+      </section>
 
-<div class="card">
-<h3>👨‍👩‍👧 Participación de la Familia</h3>
-<p>
-Los padres y acudientes deben participar activamente
-en los procesos de convivencia escolar y en la
-prevención del acoso escolar.
-</p>
-</div>
+      <div v-if="mostrarFormulario" class="formulario-panico">
 
-<div class="card">
-<h3>⚖️ Protección de los Estudiantes</h3>
-<p>
-La ley protege a los estudiantes víctimas de violencia
-escolar y garantiza mecanismos para su atención
-y acompañamiento.
-</p>
-</div>
+<h2>🚨 Reportar Bullying</h2>
 
-</div>
+<form @submit.prevent="enviarReporte">
 
-     </section>
-   <div class="panic-container">
+<input v-model="form.nombre" placeholder="Tu nombre (opcional)" />
 
-<button class="panic-btn" @click="activarPanico">
+<input v-model="form.colegio" placeholder="Colegio" required />
 
-🚨 BOTÓN DE PÁNICO
+<textarea
+v-model="form.descripcion"
+placeholder="Describe lo que está pasando"
+required
+></textarea>
 
+<button type="submit">
+Enviar Reporte
 </button>
 
+</form>
+
 </div>
-      
+      <div class="panic-container">
+        <button class="panic-btn" @click="activarPanico">
+          🚨 BOTÓN DE PÁNICO
+        </button>
+      </div>
+
+      <button class="btn-panico" @click="abrirFormulario">
+🚨 BOTÓN DE PÁNICO
+</button>
 
       <footer class="py-10 text-center border-t border-gray-100">
         <p class="text-gray-400 font-bold text-sm uppercase">
@@ -1000,8 +950,6 @@ y acompañamiento.
       </div>
     </div>
   </div>
-
-  
 </template>
 
 <script>
@@ -1009,12 +957,12 @@ import api from "./services/api";
 import * as XLSX from "xlsx";
 import html2pdf from "html2pdf.js";
 
-
-
 export default {
   data() {
     return {
-      indexCarrusel:0,
+      
+      
+      indexCarrusel: 0,
       nuevaClave: "",
       confirmarClave: "",
       nuevaIntervencion: "",
@@ -1086,13 +1034,23 @@ export default {
       this.ventana = "sistema";
       this.obtenerReportes();
     }
-    setInterval(()=>{
-  this.indexCarrusel =
-    (this.indexCarrusel + 1) % 3
-},5000)
+    setInterval(() => {
+      this.indexCarrusel = (this.indexCarrusel + 1) % 3;
+    }, 5000);
   },
 
   methods: {
+    async activarPanico() {
+      const datos = {
+        tipo: "Emergencia",
+        descripcion: "Alerta enviada desde botón de pánico",
+      };
+
+      alert("🚨 Alerta enviada al sistema");
+
+      await api.post("/reportes", datos);
+    },
+
     // 1. Abre el modal y prepara los datos
     abrirSeguimiento(reporte) {
       this.reporteSeleccionado = reporte;
@@ -1539,7 +1497,6 @@ export default {
 </script>
 
 <style>
-
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap");
 #app {
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -1547,75 +1504,73 @@ export default {
 
 /* NAVBAR */
 
-.nav-ultra{
-background:rgba(255,255,255,0.1);
-backdrop-filter:blur(15px);
-border-radius:30px;
-box-shadow:0 20px 60px rgba(0,0,0,0.3);
-margin-top:20px;
-border:1px solid rgba(255,255,255,0.15);
+.nav-ultra {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /* LOGO */
 
-.logo-box{
-background:linear-gradient(135deg,#2563eb,#6366f1);
-color:white;
-padding:10px 14px;
-border-radius:12px;
-font-weight:900;
-font-size:18px;
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
+.logo-box {
+  background: linear-gradient(135deg, #2563eb, #6366f1);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 /* TEXTO LOGO */
 
-.logo-text{
-font-size:26px;
-font-weight:900;
-letter-spacing:-1px;
-background:linear-gradient(90deg,#38bdf8,#6366f1,#22c55e);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+.logo-text {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  background: linear-gradient(90deg, #38bdf8, #6366f1, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* BOTON LOGIN */
 
-.btn-login{
-padding:10px 20px;
-font-weight:800;
-color:#38bdf8;
-border-radius:12px;
-transition:0.3s;
+.btn-login {
+  padding: 10px 20px;
+  font-weight: 800;
+  color: #38bdf8;
+  border-radius: 12px;
+  transition: 0.3s;
 }
 
-.btn-login:hover{
-color:#60a5fa;
-transform:scale(1.05);
+.btn-login:hover {
+  color: #60a5fa;
+  transform: scale(1.05);
 }
 
 /* BOTON REGISTRO */
 
-.btn-registro{
-background:linear-gradient(90deg,#2563eb,#6366f1);
-color:white;
-padding:10px 24px;
-border-radius:16px;
-font-weight:900;
-letter-spacing:1px;
-transition:0.4s;
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
+.btn-registro {
+  background: linear-gradient(90deg, #2563eb, #6366f1);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 16px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  transition: 0.4s;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 /* HOVER */
 
-.btn-registro:hover{
-transform:translateY(-3px) scale(1.05);
-background:linear-gradient(90deg,#3b82f6,#8b5cf6);
-box-shadow:0 20px 50px rgba(0,0,0,0.6);
+.btn-registro:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
-
-
 
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out;
@@ -1687,499 +1642,498 @@ box-shadow:0 20px 50px rgba(0,0,0,0.6);
   transform: scale(1.05);
 }
 
-
 /*segundo stylo*/
 
-
-
-.ley-container{
-padding:80px 40px;
-background:linear-gradient(135deg,#0f172a,#020617);
-color:white;
-text-align:center;
+.ley-container {
+  padding: 80px 40px;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: white;
+  text-align: center;
 }
 
-.titulo{
-font-size:38px;
-font-weight:900;
-margin-bottom:20px;
+.titulo {
+  font-size: 38px;
+  font-weight: 900;
+  margin-bottom: 20px;
 }
 
-.descripcion{
-max-width:800px;
-margin:auto;
-margin-bottom:50px;
-color:#cbd5f5;
+.descripcion {
+  max-width: 800px;
+  margin: auto;
+  margin-bottom: 50px;
+  color: #cbd5f5;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-max-width:1100px;
-margin:auto;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  max-width: 1100px;
+  margin: auto;
 }
 
-.card{
-background:rgba(255,255,255,0.05);
-padding:25px;
-border-radius:20px;
-backdrop-filter:blur(10px);
-transition:0.4s;
-box-shadow:0 15px 40px rgba(0,0,0,0.6);
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  transition: 0.4s;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
 }
 
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 25px 60px rgba(0,0,0,0.9);
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
 }
 
-.card h3{
-font-size:20px;
-margin-bottom:10px;
+.card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
-.card p{
-font-size:14px;
-color:#cbd5f5;
+.card p {
+  font-size: 14px;
+  color: #cbd5f5;
 }
 
 /* TITULO 111 */
 
-.titulo-saas{
-text-align:center;
-font-size:40px;
-font-weight:900;
-margin-bottom:70px;
-letter-spacing:2px;
-background:linear-gradient(90deg,#2563eb,#6366f1,#22c55e);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+.titulo-saas {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 70px;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #2563eb, #6366f1, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* TARJETAS */
 
-.card-saas{
-background:rgba(255,255,255,0.6);
-backdrop-filter:blur(15px);
-border-radius:40px;
-padding:40px 30px;
-text-align:center;
-transition:0.4s;
-box-shadow:0 25px 60px rgba(0,0,0,0.15);
-border:1px solid rgba(255,255,255,0.5);
-cursor:pointer;
-position:relative;
-overflow:hidden;
+.card-saas {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(15px);
+  border-radius: 40px;
+  padding: 40px 30px;
+  text-align: center;
+  transition: 0.4s;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 /* EFECTO HOVER */
 
-.card-saas:hover{
-transform:translateY(-15px) scale(1.05);
-box-shadow:0 40px 80px rgba(0,0,0,0.25);
+.card-saas:hover {
+  transform: translateY(-15px) scale(1.05);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
 }
 
 /* NUMERO GRANDE */
 
-.numero{
-font-size:70px;
-font-weight:900;
-margin-bottom:10px;
+.numero {
+  font-size: 70px;
+  font-weight: 900;
+  margin-bottom: 10px;
 }
 
 /* TITULO */
 
-.card-saas h4{
-font-size:22px;
-font-weight:900;
-margin-bottom:10px;
-color:#0f172a;
+.card-saas h4 {
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  color: #0f172a;
 }
 
 /* SUBTITULO */
 
-.sub{
-font-style:italic;
-font-weight:700;
-margin-bottom:10px;
+.sub {
+  font-style: italic;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 /* DESCRIPCION */
 
-.desc{
-font-size:14px;
-color:#475569;
+.desc {
+  font-size: 14px;
+  color: #475569;
 }
 
 /* COLORES */
 
-.tipo1 .numero{color:#2563eb;}
-.tipo2 .numero{color:#f59e0b;}
-.tipo3 .numero{color:#ef4444;}
+.tipo1 .numero {
+  color: #2563eb;
+}
+.tipo2 .numero {
+  color: #f59e0b;
+}
+.tipo3 .numero {
+  color: #ef4444;
+}
 
-.tipo1:hover{background:linear-gradient(135deg,#dbeafe,#bfdbfe);}
-.tipo2:hover{background:linear-gradient(135deg,#fef3c7,#fde68a);}
-.tipo3:hover{background:linear-gradient(135deg,#fee2e2,#fecaca);}
-
-
+.tipo1:hover {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+}
+.tipo2:hover {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+}
+.tipo3:hover {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+}
 
 /* FONDO */
 
-.ley-section{
-background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
-color:white;
+.ley-section {
+  background: linear-gradient(135deg, #020617, #0f172a, #1e293b);
+  color: white;
 }
 
 /* ETIQUETA */
 
-.ley-tag{
-font-size:12px;
-font-weight:900;
-letter-spacing:2px;
-text-transform:uppercase;
-background:linear-gradient(90deg,#38bdf8,#6366f1);
-padding:6px 14px;
-border-radius:20px;
-display:inline-block;
-margin-bottom:15px;
+.ley-tag {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #38bdf8, #6366f1);
+  padding: 6px 14px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 15px;
 }
 
 /* TITULO */
 
-.ley-title{
-font-size:42px;
-font-weight:900;
-margin-bottom:20px;
-background:linear-gradient(90deg,#38bdf8,#6366f1,#22c55e);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+.ley-title {
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #38bdf8, #6366f1, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* TEXTO */
 
-.ley-text{
-color:#cbd5f5;
-line-height:1.7;
-margin-bottom:20px;
+.ley-text {
+  color: #cbd5f5;
+  line-height: 1.7;
+  margin-bottom: 20px;
 }
 
 /* LISTA */
 
-.ley-list{
-display:flex;
-gap:10px;
-font-weight:700;
-color:#e2e8f0;
+.ley-list {
+  display: flex;
+  gap: 10px;
+  font-weight: 700;
+  color: #e2e8f0;
 }
 
-.check{
-color:#22c55e;
-font-size:18px;
+.check {
+  color: #22c55e;
+  font-size: 18px;
 }
 
 /* TARJETAS */
 
-.card-ley{
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(15px);
-border-radius:25px;
-padding:25px;
-border:1px solid rgba(255,255,255,0.1);
-transition:0.4s;
-box-shadow:0 20px 60px rgba(0,0,0,0.6);
+.card-ley {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: 0.4s;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 
 /* HOVER */
 
-.card-ley:hover{
-transform:translateY(-10px) scale(1.03);
-box-shadow:0 30px 80px rgba(0,0,0,0.9);
-border:1px solid #38bdf8;
+.card-ley:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+  border: 1px solid #38bdf8;
 }
 
 /* TITULO TARJETAS */
 
-.card-ley h4{
-font-weight:900;
-margin-bottom:10px;
-font-size:18px;
+.card-ley h4 {
+  font-weight: 900;
+  margin-bottom: 10px;
+  font-size: 18px;
 }
 
 /* TEXTO TARJETAS */
 
-.card-ley p{
-color:#cbd5f5;
-font-size:14px;
+.card-ley p {
+  color: #cbd5f5;
+  font-size: 14px;
 }
-
-
-
 
 /* HEADER */
 
-.header-ultra{
-background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
-border-radius:40px;
-box-shadow:0 30px 80px rgba(0,0,0,0.4);
+.header-ultra {
+  background: linear-gradient(135deg, #020617, #0f172a, #1e293b);
+  border-radius: 40px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
 }
 
 /* TITULO */
 
-.titulo-ultra{
-font-size:70px;
-font-weight:900;
-margin-bottom:25px;
-letter-spacing:-2px;
-text-transform:uppercase;
-background:linear-gradient(90deg,#38bdf8,#6366f1,#22c55e);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:glow 3s infinite alternate;
+.titulo-ultra {
+  font-size: 70px;
+  font-weight: 900;
+  margin-bottom: 25px;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #38bdf8, #6366f1, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow 3s infinite alternate;
 }
 
 /* TEXTO */
 
-.texto-ultra{
-font-size:20px;
-color:#cbd5f5;
-margin-bottom:40px;
-line-height:1.7;
+.texto-ultra {
+  font-size: 20px;
+  color: #cbd5f5;
+  margin-bottom: 40px;
+  line-height: 1.7;
 }
 
 /* BOTON */
 
-.btn-ultra{
-background:linear-gradient(90deg,#2563eb,#6366f1);
-color:white;
-padding:16px 35px;
-border-radius:20px;
-font-weight:900;
-text-transform:uppercase;
-font-size:14px;
-letter-spacing:1px;
-transition:0.4s;
-box-shadow:0 15px 40px rgba(0,0,0,0.4);
+.btn-ultra {
+  background: linear-gradient(90deg, #2563eb, #6366f1);
+  color: white;
+  padding: 16px 35px;
+  border-radius: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+  transition: 0.4s;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
 /* HOVER */
 
-.btn-ultra:hover{
-transform:translateY(-5px) scale(1.05);
-background:linear-gradient(90deg,#3b82f6,#8b5cf6);
-box-shadow:0 25px 60px rgba(0,0,0,0.6);
+.btn-ultra:hover {
+  transform: translateY(-5px) scale(1.05);
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
 }
 
 /* GLOW TITULO */
 
-@keyframes glow{
-from{
-filter:drop-shadow(0 0 10px #38bdf8);
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 10px #38bdf8);
+  }
+  to {
+    filter: drop-shadow(0 0 25px #6366f1);
+  }
 }
-to{
-filter:drop-shadow(0 0 25px #6366f1);
-}
-}
-
 
 /* CONTENEDOR PRINCIPAL */
 
-.app-ultra{
+.app-ultra {
+  min-height: 100vh;
 
-min-height:100vh;
+  font-family: "Poppins", sans-serif;
 
-font-family:"Poppins",sans-serif;
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(56, 189, 248, 0.2),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(99, 102, 241, 0.2),
+      transparent 40%
+    ),
+    linear-gradient(135deg, #020617, #0f172a, #1e293b);
 
-background:
-radial-gradient(circle at 20% 30%, rgba(56,189,248,0.2), transparent 40%),
-radial-gradient(circle at 80% 70%, rgba(99,102,241,0.2), transparent 40%),
-linear-gradient(135deg,#020617,#0f172a,#1e293b);
+  color: #e2e8f0;
 
-color:#e2e8f0;
-
-overflow-x:hidden;
-
+  overflow-x: hidden;
 }
 
 /* EFECTO DE BRILLO EN EL FONDO */
 
-.app-ultra::before{
+.app-ultra::before {
+  content: "";
 
-content:"";
+  position: fixed;
 
-position:fixed;
+  top: 0;
+  left: 0;
 
-top:0;
-left:0;
+  width: 100%;
+  height: 100%;
 
-width:100%;
-height:100%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.05),
+    transparent 60%
+  );
 
-background:
-radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05), transparent 60%);
+  pointer-events: none;
 
-pointer-events:none;
-
-z-index:-1;
-
+  z-index: -1;
 }
 
 /* SCROLL MODERNO */
 
-::-webkit-scrollbar{
-width:10px;
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-::-webkit-scrollbar-track{
-background:#020617;
+::-webkit-scrollbar-track {
+  background: #020617;
 }
 
-::-webkit-scrollbar-thumb{
-background:linear-gradient(#38bdf8,#6366f1);
-border-radius:20px;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#38bdf8, #6366f1);
+  border-radius: 20px;
 }
 
 /* ANIMACION SUAVE */
 
-.app-ultra{
-animation:fondoAnimado 10s ease infinite alternate;
+.app-ultra {
+  animation: fondoAnimado 10s ease infinite alternate;
 }
 
-@keyframes fondoAnimado{
+@keyframes fondoAnimado {
+  0% {
+    background-position: 0% 50%;
+  }
 
-0%{
-background-position:0% 50%;
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
-100%{
-background-position:100% 50%;
+.carruselCero {
+  margin-top: 40px;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #020617, #0f172a, #1e293b);
+  border-radius: 20px;
+  overflow: hidden;
 }
 
+.carrusel-container {
+  overflow: hidden;
+  max-width: 1100px;
+  margin: auto;
 }
 
-
-.carruselCero{
-
-margin-top:40px;
-padding:60px 20px;
-background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
-border-radius:20px;
-overflow:hidden;
-
+.carrusel-slide {
+  display: flex;
+  transition: 0.8s;
 }
 
-.carrusel-container{
-overflow:hidden;
-max-width:1100px;
-margin:auto;
+.slide {
+  min-width: 100%;
+  position: relative;
 }
 
-.carrusel-slide{
-display:flex;
-transition:0.8s;
+.slide img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 20px;
 }
 
-.slide{
-min-width:100%;
-position:relative;
+.texto {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  color: white;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(8px);
 }
 
-.slide img{
-width:100%;
-height:420px;
-object-fit:cover;
-border-radius:20px;
+.texto h2 {
+  font-size: 32px;
+  font-weight: 900;
+  margin-bottom: 10px;
 }
 
-.texto{
-position:absolute;
-bottom:40px;
-left:40px;
-color:white;
-background:rgba(0,0,0,0.4);
-padding:20px;
-border-radius:15px;
-backdrop-filter:blur(8px);
+.dots {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
-.texto h2{
-font-size:32px;
-font-weight:900;
-margin-bottom:10px;
+.dots span {
+  width: 12px;
+  height: 12px;
+  background: #64748b;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.dots{
-margin-top:20px;
-display:flex;
-justify-content:center;
-gap:10px;
+.dots .activo {
+  background: #38bdf8;
 }
 
-.dots span{
-width:12px;
-height:12px;
-background:#64748b;
-border-radius:50%;
-cursor:pointer;
+.panic-container {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
 }
 
-.dots .activo{
-background:#38bdf8;
+.panic-btn {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+
+  color: white;
+
+  font-size: 22px;
+
+  font-weight: 900;
+
+  padding: 20px 40px;
+
+  border-radius: 20px;
+
+  border: none;
+
+  cursor: pointer;
+
+  box-shadow: 0 20px 60px rgba(239, 68, 68, 0.6);
+
+  transition: 0.4s;
+
+  animation: pulse 2s infinite;
 }
 
-.panic-container{
-display:flex;
-justify-content:center;
-margin:50px 0;
+.panic-btn:hover {
+  transform: scale(1.1);
+
+  background: linear-gradient(135deg, #dc2626, #991b1b);
 }
 
-.panic-btn{
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
 
-background:linear-gradient(135deg,#ef4444,#b91c1c);
+  70% {
+    box-shadow: 0 0 0 25px rgba(239, 68, 68, 0);
+  }
 
-color:white;
-
-font-size:22px;
-
-font-weight:900;
-
-padding:20px 40px;
-
-border-radius:20px;
-
-border:none;
-
-cursor:pointer;
-
-box-shadow:0 20px 60px rgba(239,68,68,0.6);
-
-transition:0.4s;
-
-animation:pulse 2s infinite;
-
-}
-
-.panic-btn:hover{
-
-transform:scale(1.1);
-
-background:linear-gradient(135deg,#dc2626,#991b1b);
-
-}
-
-@keyframes pulse{
-
-0%{
-box-shadow:0 0 0 0 rgba(239,68,68,0.7);
-}
-
-70%{
-box-shadow:0 0 0 25px rgba(239,68,68,0);
-}
-
-100%{
-box-shadow:0 0 0 0 rgba(239,68,68,0);
-}
-
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
 }
 </style>
