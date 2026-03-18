@@ -1532,7 +1532,7 @@ export default {
   font-weight: 900;
   letter-spacing: -1px;
   background: linear-gradient(90deg, #38bdf8, #6366f1, #22c55e);
-  -webkit-background-clip: ;
+  -webkit-background-clip:text ;
   -webkit-text-fill-color: transparent;
 }
 
