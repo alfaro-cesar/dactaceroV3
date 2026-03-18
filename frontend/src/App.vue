@@ -1532,6 +1532,7 @@ export default {
   font-weight: 900;
   letter-spacing: -1px;
   background: linear-gradient(90deg, #38bdf8, #6366f1, #22c55e);
+  -webkit-background-clip: ;
   -webkit-text-fill-color: transparent;
 }
 
@@ -1704,6 +1705,7 @@ export default {
   margin-bottom: 70px;
   letter-spacing: 2px;
   background: linear-gradient(90deg, #2563eb, #6366f1, #22c55e);
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -1812,6 +1814,7 @@ export default {
   font-weight: 900;
   margin-bottom: 20px;
   background: linear-gradient(90deg, #38bdf8, #6366f1, #22c55e);
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -1889,6 +1892,7 @@ export default {
   letter-spacing: -2px;
   text-transform: uppercase;
   background: linear-gradient(90deg, #38bdf8, #6366f1, #22c55e);
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: glow 3s infinite alternate;
 }
