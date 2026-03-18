@@ -46,7 +46,7 @@
               />
               <div class="texto">
                 <h2>Reporta situaciones de acoso</h2>
-                <p>Tu voz puede cambiar una vida.</p>
+                <p>Tu voz puede cambiar una vida y mas.</p>
               </div>
             </div>
 
