@@ -4,25 +4,7 @@ const db = require('../config/db');
 const bcrypt = require('bcrypt');
 
 
-// RUTA PARA ELIMINAR USUARIOS (Añadir al final de api.js)
-router.delete('/usuarios/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
 
-        // Validamos primero que el usuario no sea admin
-        const [usuario] = await db.query("SELECT rol FROM usuarios WHERE id = ?", [id]);
-        
-        if (usuario.length > 0 && usuario[0].rol === 'admin') {
-            return res.status(403).json({ success: false, message: "Protección de seguridad: No se pueden eliminar administradores." });
-        }
-
-        await db.query("DELETE FROM usuarios WHERE id = ?", [id]);
-        res.json({ success: true, message: "Usuario eliminado correctamente." });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: "Error al intentar eliminar." });
-    }
-});
 
 // Ruta para carga masiva de estudiantes
 router.post('/estudiantes/carga-masiva', async (req, res) => {
@@ -174,25 +156,24 @@ router.post('/login', async (req, res) => {
 router.get('/estadisticas/:colegio_id', async (req, res) => {
     try {
         const { colegio_id } = req.params;
-        const { usuario_id, rol } = req.query; // Recibimos quién pregunta
+        const { usuario_id, rol } = req.query;
 
         let query = "";
         let params = [];
 
         if (rol === 'admin') {
-            // El admin ve TODO lo de su colegio
+            // Cambiamos r.* por los campos específicos y u.nombre como nombre_usuario
             query = `
-                SELECT r.*, u.nombre as autor 
-                FROM reportes r 
-                INNER JOIN usuarios u ON r.usuario_id = u.id 
-                WHERE u.colegio_id = ?
-                ORDER BY r.fecha DESC
+                SELECT r.*, u.nombre AS nombre_usuario 
+        FROM reportes r 
+        INNER JOIN usuarios u ON r.usuario_id = u.id 
+        WHERE u.colegio_id = ?
+        ORDER BY r.fecha DESC
             `;
             params = [colegio_id];
         } else {
-            // El estudiante SOLO ve sus propios reportes dentro de su colegio
             query = `
-                SELECT r.*, u.nombre as autor 
+                SELECT r.*, u.nombre as nombre_usuario 
                 FROM reportes r 
                 INNER JOIN usuarios u ON r.usuario_id = u.id 
                 WHERE u.colegio_id = ? AND r.usuario_id = ?
@@ -211,13 +192,13 @@ router.get('/estadisticas/:colegio_id', async (req, res) => {
 
 
 router.post('/reportes', async (req, res) => {
+    // Verificamos que lleguen estos campos del Frontend
     const { tipo, descripcion, ubicacion, usuario_id, colegio_id } = req.body;
 
-    // Validación de seguridad
     if (!usuario_id || !colegio_id) {
         return res.status(400).json({ 
             success: false, 
-            message: "Faltan datos de identificación del usuario o colegio." 
+            message: "Faltan datos de identificación (usuario/colegio)." 
         });
     }
 
@@ -226,24 +207,42 @@ router.post('/reportes', async (req, res) => {
             INSERT INTO reportes (tipo, descripcion, ubicacion, usuario_id, colegio_id, estado, fecha) 
             VALUES (?, ?, ?, ?, ?, 'nuevo', NOW())
         `;
-        
         await db.query(query, [tipo, descripcion, ubicacion, usuario_id, colegio_id]);
-        
         res.json({ success: true, message: "Reporte guardado correctamente" });
     } catch (error) {
-        console.error("Error al guardar reporte:", error);
-        res.status(500).json({ success: false, message: "Error interno en el servidor" });
+        res.status(500).json({ success: false, message: "Error en el servidor" });
     }
 });
+
+
 
 router.put('/reportes/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { estado } = req.body; 
-        await db.query("UPDATE reportes SET estado = ? WHERE id = ?", [estado, id]);
+        
+        const { descripcion, estado, seguimiento, tipo } = req.body; 
+
+        const query = `
+            UPDATE reportes 
+            SET descripcion = COALESCE(?, descripcion), 
+                estado = COALESCE(?, estado),
+                seguimiento = COALESCE(?, seguimiento),
+                tipo = COALESCE(?, tipo), -- ESTA LÍNEA ES CLAVE
+                editado = 1 
+            WHERE id = ?
+        `;
+
+        // AGREGA 'tipo' A LOS PARÁMETROS DEL QUERY
+        const [resultado] = await db.query(query, [descripcion, estado, seguimiento, tipo, id]);
+
+        if (resultado.affectedRows === 0) {
+            return res.status(404).json({ success: false, message: "No se encontró el reporte" });
+        }
+
         res.json({ success: true });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error(error);
+        res.status(500).json({ success: false, message: error.message });
     }
 });
 
@@ -304,6 +303,68 @@ router.put('/usuarios/password/:id', async (req, res) => {
     } catch (error) {
         console.error("Error al actualizar password:", error);
         res.status(500).json({ success: false, message: "Error interno del servidor." });
+    }
+});
+
+// ACTUALIZAR PASSWORD INICIAL (Estudiantes)
+router.post('/usuarios/actualizar-password-inicial', async (req, res) => {
+    try {
+        const { usuarioId, nuevoPassword } = req.body;
+
+        if (!usuarioId || !nuevoPassword) {
+            return res.status(400).json({ success: false, message: "Datos incompletos." });
+        }
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(nuevoPassword, saltRounds);
+
+        // Actualizamos la clave y reseteamos la bandera de cambio obligatorio
+        const query = `
+            UPDATE usuarios 
+            SET password = ?, must_change_password = 0 
+            WHERE id = ?
+        `;
+
+        const [resultado] = await db.query(query, [hashedPassword, usuarioId]);
+
+        if (resultado.affectedRows === 0) {
+            return res.status(404).json({ success: false, message: "Usuario no encontrado." });
+        }
+
+        res.json({ 
+            success: true, 
+            message: "Contraseña actualizada. Ahora puedes acceder al sistema." 
+        });
+    } catch (error) {
+        console.error("Error al actualizar password inicial:", error);
+        res.status(500).json({ success: false, message: "Error interno del servidor." });
+    }
+});
+
+// RUTA PARA ELIMINAR USUARIOS 
+router.delete('/usuarios/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        // Obtenemos el usuario que se desea eliminar
+        const [usuario] = await db.query("SELECT rol FROM usuarios WHERE id = ?", [id]);
+        
+        if (usuario.length === 0) {
+            return res.status(404).json({ success: false, message: "Usuario no encontrado." });
+        }
+
+        // Bloqueo de seguridad: No se pueden eliminar administradores/rectores desde aquí
+        if (usuario[0].rol === 'admin' || usuario[0].rol === 'rector') {
+            return res.status(403).json({ 
+                success: false, 
+                message: "Protección de seguridad: No se pueden eliminar usuarios de nivel administrativo." 
+            });
+        }
+
+        await db.query("DELETE FROM usuarios WHERE id = ?", [id]);
+        res.json({ success: true, message: "Usuario eliminado correctamente." });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Error al intentar eliminar." });
     }
 });
 
