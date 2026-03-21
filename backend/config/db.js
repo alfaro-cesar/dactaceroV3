@@ -5,7 +5,13 @@ const config = require('./config.json')[env];
 
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  const dbUrl = process.env[config.use_env_variable];
+  if (!dbUrl) {
+    console.warn(`⚠️ Advertencia: ${config.use_env_variable} no definida. Usando configuración por defecto.`);
+    sequelize = new Sequelize(config.database, config.username, config.password, config);
+  } else {
+    sequelize = new Sequelize(dbUrl, config);
+  }
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
