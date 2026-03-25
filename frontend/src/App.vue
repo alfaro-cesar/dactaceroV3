@@ -85,12 +85,12 @@
           estudiantil en Colombia.
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a
-            href="/ley1620.html"
+          <button
+            @click="ventana = 'ley1620'"
             class="bg-white text-gray-800 px-8 py-4 rounded-2xl font-bold hover:bg-gray-50 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border border-gray-200"
           >
             Saber más sobre la Ley 1620
-          </a>
+          </button>
           <button
             @click="ventana = 'login'"
             class="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-8 py-4 rounded-2xl font-bold hover:from-blue-700 hover:to-blue-900 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
@@ -474,8 +474,8 @@
                 </li>
                 <li>
                   <a
-                    href="#ley1620"
-                    class="hover:text-white hover:translate-x-1 transition-all inline-block"
+                    @click="ventana = 'ley1620'"
+                    class="hover:text-white hover:translate-x-1 transition-all inline-block cursor-pointer"
                     >Ley 1620</a
                   >
                 </li>
@@ -567,6 +567,12 @@
         </button>
       </footer>
     </div>
+
+    <Ley1620
+      v-else-if="ventana === 'ley1620'"
+      @volver="ventana = 'inicio'"
+      @acceder="ventana = 'login'"
+    />
 
     <div
       v-else-if="cargando"
@@ -1639,8 +1645,10 @@ import * as XLSX from "xlsx";
 import html2pdf from "html2pdf.js";
 import Chart from "chart.js/auto";
 import "aos/dist/aos.css";
+import Ley1620 from "./components/Ley1620.vue";
 
 export default {
+  components: { Ley1620 },
   data() {
     return {
       mostrarChatbot: false,
