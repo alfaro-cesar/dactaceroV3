@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     estado: { type: DataTypes.STRING, defaultValue: 'nuevo' },
     fecha: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     seguimiento: DataTypes.TEXT,
-    editado: { type: DataTypes.INTEGER, defaultValue: 0 }
+    editado: { type: DataTypes.INTEGER, defaultValue: 0 },
+    clasificacion: { type: DataTypes.ENUM('Tipo I', 'Tipo II', 'Tipo III'), allowNull: true }
   }, {
     sequelize,
     modelName: 'Reporte',

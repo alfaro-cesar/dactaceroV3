@@ -934,6 +934,15 @@
                         usuarioActivo?.rol === 'admin' ||
                         usuarioActivo?.rol === 'rector'
                       "
+                      class="p-6"
+                    >
+                      Clasificación
+                    </th>
+                    <th
+                      v-if="
+                        usuarioActivo?.rol === 'admin' ||
+                        usuarioActivo?.rol === 'rector'
+                      "
                       class="p-6 text-center"
                     >
                       Gestión
@@ -998,6 +1007,33 @@
                         }"
                         class="px-3 py-1 rounded-full text-[10px] font-black uppercase italic"
                         >{{ reporte.estado }}</span
+                      >
+                    </td>
+                    <td
+                      v-if="
+                        usuarioActivo?.rol === 'admin' ||
+                        usuarioActivo?.rol === 'rector'
+                      "
+                      class="p-6"
+                    >
+                      <span
+                        v-if="reporte.clasificacion"
+                        :class="{
+                          'bg-blue-100 text-blue-700 border-blue-200':
+                            reporte.clasificacion === 'Tipo I',
+                          'bg-orange-100 text-orange-700 border-orange-200':
+                            reporte.clasificacion === 'Tipo II',
+                          'bg-red-100 text-red-700 border-red-200':
+                            reporte.clasificacion === 'Tipo III',
+                        }"
+                        class="px-3 py-1 rounded-lg border font-black uppercase text-[10px] tracking-tighter"
+                      >
+                        {{ reporte.clasificacion }}
+                      </span>
+                      <span
+                        v-else
+                        class="text-[10px] font-bold text-gray-300 uppercase italic"
+                        >Sin clasificar</span
                       >
                     </td>
                     <td class="p-6 text-center">
@@ -1391,6 +1427,41 @@
               placeholder="Escribe aquí los acuerdos, citaciones o acciones tomadas..."
               class="w-full p-4 bg-gray-50 border-2 rounded-2xl font-bold outline-none focus:border-blue-600"
             ></textarea>
+          </div>
+
+          <div class="space-y-2">
+            <label
+              class="text-[10px] font-black text-gray-400 uppercase tracking-widest"
+              >Clasificación según Ley 1620</label
+            >
+            <select
+              v-model="reporteSeleccionado.clasificacion"
+              class="w-full p-4 bg-gray-50 border-2 rounded-2xl font-bold outline-none focus:border-blue-600 text-sm"
+            >
+              <option :value="null">Sin clasificar</option>
+              <option value="Tipo I">Tipo I — Conflicto esporádico</option>
+              <option value="Tipo II">Tipo II — Acoso o Ciberacoso</option>
+              <option value="Tipo III">Tipo III — Presunto Delito</option>
+            </select>
+            <div
+              v-if="reporteSeleccionado.clasificacion"
+              class="flex items-center gap-2 mt-1"
+            >
+              <span
+                :class="{
+                  'bg-blue-100 text-blue-700 border-blue-200':
+                    reporteSeleccionado.clasificacion === 'Tipo I',
+                  'bg-orange-100 text-orange-700 border-orange-200':
+                    reporteSeleccionado.clasificacion === 'Tipo II',
+                  'bg-red-100 text-red-700 border-red-200':
+                    reporteSeleccionado.clasificacion === 'Tipo III',
+                }"
+                class="px-3 py-1 rounded-lg border font-black uppercase text-[10px] tracking-tighter"
+              >
+                {{ reporteSeleccionado.clasificacion }}
+              </span>
+              <span class="text-[10px] text-gray-400 font-bold italic">seleccionado</span>
+            </div>
           </div>
 
           <div class="space-y-4">
@@ -1979,6 +2050,7 @@ export default {
           seguimiento: seguimientoActualizado,
           estado: this.reporteSeleccionado.estado,
           tipo: this.reporteSeleccionado.tipo,
+          clasificacion: this.reporteSeleccionado.clasificacion,
         });
 
         this.reporteSeleccionado.seguimiento = seguimientoActualizado;

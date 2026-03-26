@@ -181,10 +181,10 @@ router.post('/reportes', async (req, res) => {
 router.put('/reportes/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { descripcion, estado, seguimiento, tipo } = req.body; 
+        const { descripcion, estado, seguimiento, tipo, clasificacion } = req.body;
 
         const [updated] = await Reporte.update({
-            descripcion, estado, seguimiento, tipo, editado: 1
+            descripcion, estado, seguimiento, tipo, clasificacion, editado: 1
         }, {
             where: { id }
         });
